@@ -1,11 +1,13 @@
-//Creating employee payroll data with id, name and salary
+//UC12 - Extend employee payroll data with gender and start date
 class EmployeePayrollData{
 
     //constructor
-    constructor(id, name, salary){
+    constructor(id, name, salary, gender, startDate){
         this.id = id;
         this.name = name;
         this.salary = salary;
+        this.gender = gender;
+        this.startDate = startDate;
     }
 
     //Getters and setters
@@ -24,8 +26,21 @@ class EmployeePayrollData{
         this.salary = salary;
     }
 
+    getGender(){ return this.gender; }
+    setGender(gender){
+        this.gender = gender;
+    }
+
+    getStartDate(){ return this.startDate; }
+    setStartDate(startDate){
+        this.startDate = startDate;
+    }
+
     toString(){
-        return "Id = " + this.id + "\nName = " + this.name + "\nSalary = " + this.salary;
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const employeeDate = this.startDate == undefined ? "undefined" : this.startDate.toLocaleDateString("en-us", options);
+        return "Id = " + this.id + ",\tName = " + this.name + ",\tSalary = " + this.salary +
+         ",\tGender = " + this.gender + ",\tStart Date = " + employeeDate;
     }
 }
 //calling the constructor
@@ -35,3 +50,6 @@ employeePayrollData.id = 2;
 employeePayrollData.name = "Ace";
 employeePayrollData.salary = 12345;
 console.log(employeePayrollData.toString());
+
+let newemployeePayrollData = new EmployeePayrollData(4, "Zlatan", 50000, "M", new Date());
+console.log(newemployeePayrollData.toString());
