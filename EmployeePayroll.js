@@ -1,4 +1,4 @@
-//UC13 - Using RegEx too check name starts with capital and has min 3 characters
+//UC14 - Using RegEx to check about id, salary, gender and date
 class EmployeePayrollData{
 
     //constructor
@@ -13,7 +13,11 @@ class EmployeePayrollData{
     //Getters and setters
     getId(){ return this.id; }
     setId(id){
-        this.id = id;
+        let idRegex = RegExp('^[1-9][0-9]*$');
+        if (idRegex.test(id))
+            this.id = id;
+        else
+            throw "ID is Incorrect";
     }
 
     getName(){ return this.name; }
@@ -27,17 +31,28 @@ class EmployeePayrollData{
 
     getSalary(){ return this.salary; }
     setSalary(salary){
-        this.salary = salary;
+        let salaryRegex = RegExp('^[1-9][0-9]*$');
+        if (salaryRegex.test(salary))
+            this.salary = salary;
+        else
+            throw "SALARY is Incorrect";
     }
 
     getGender(){ return this.gender; }
     setGender(gender){
-        this.gender = gender;
+        let genderRegex = RegExp("^[F|M]$");
+        if (genderRegex.test(gender))
+            this.gender = gender;
+        else 
+            throw "GENDER is Incorrect";
     }
 
     getStartDate(){ return this.startDate; }
     setStartDate(startDate){
-        this.startDate = startDate;
+        if(startDate <= new Date())
+            this.startDate = startDate;
+        else
+            throw "START DATE is Incorrect";
     }
 
     toString(){
@@ -50,12 +65,14 @@ class EmployeePayrollData{
 //calling the constructor
 let employeePayrollData = new EmployeePayrollData(1, "Pikachu", 87654);
 console.log(employeePayrollData.toString());
-try{
-    employeePayrollData.id = 2;
-    employeePayrollData.name = "ace";
-    employeePayrollData.salary = 12345;
-    console.log(employeePayrollData.toString());
-}catch(e){console.error(e);}
 
 let newemployeePayrollData = new EmployeePayrollData(4, "Zlatan", 50000, "M", new Date());
 console.log(newemployeePayrollData.toString());
+
+//creating employee object with invalid inputs
+try {
+    let employee = new EmployeePayrollData(0, "Jack", -5000, "X", new Date("2023-03-30"));
+    console.log(employee.toString());
+} catch (e) {
+    console.error(e);
+}
