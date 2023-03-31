@@ -1,4 +1,4 @@
-//UC12 - Extend employee payroll data with gender and start date
+//UC13 - Using RegEx too check name starts with capital and has min 3 characters
 class EmployeePayrollData{
 
     //constructor
@@ -18,7 +18,11 @@ class EmployeePayrollData{
 
     getName(){ return this.name; }
     setName(name){
-        this.name = name;
+        let nameRegex = RegExp("^[A-Z]{1}[a-z]{3,}$");
+        if(nameRegex.test(name))
+            this.name = name;
+        else
+            throw "NAME is Incorrect";
     }
 
     getSalary(){ return this.salary; }
@@ -46,10 +50,12 @@ class EmployeePayrollData{
 //calling the constructor
 let employeePayrollData = new EmployeePayrollData(1, "Pikachu", 87654);
 console.log(employeePayrollData.toString());
-employeePayrollData.id = 2;
-employeePayrollData.name = "Ace";
-employeePayrollData.salary = 12345;
-console.log(employeePayrollData.toString());
+try{
+    employeePayrollData.id = 2;
+    employeePayrollData.name = "ace";
+    employeePayrollData.salary = 12345;
+    console.log(employeePayrollData.toString());
+}catch(e){console.error(e);}
 
 let newemployeePayrollData = new EmployeePayrollData(4, "Zlatan", 50000, "M", new Date());
 console.log(newemployeePayrollData.toString());
